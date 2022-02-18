@@ -1,7 +1,7 @@
 import Slider from "./modules/slider"
 
 
-window.addEventListener("click", () => {
-    const slider = new Slider('.page');
+window.addEventListener('DOMContentLoaded', () => {
+    const slider = new Slider('.page', '.next');
     slider.render();
 })
