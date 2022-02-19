@@ -17,8 +17,8 @@ class Slider {
     this.page = document.querySelector(page);
     this.slides = this.page.children;
     this.btns = document.querySelectorAll(btns);
-    this.home = document.querySelector(".sidecontrol a");
     this.slideIndex = 1;
+    this.hanson = document.querySelector('.hanson');
   }
 
   showSlides(number) {
@@ -31,9 +31,20 @@ class Slider {
     }
 
     [...this.slides].forEach(slide => {
-      slide.style.display = 'none';
+      slide.style.display = 'none'; // slide.style.opacity = '0';
     });
-    this.slides[this.slideIndex - 1].style.display = 'block';
+
+    if (this.slideIndex === 3) {
+      this.hanson.style.opacity = '0';
+      this.hanson.classList.add('animated');
+      setTimeout(() => {
+        this.hanson.style.opacity = '1';
+        this.hanson.classList.add('slideInUp');
+      }, 3000);
+    }
+
+    this.slides[this.slideIndex - 1].style.display = 'block'; // this.slides[this.slideIndex - 1].classList.add('animated');
+    // this.slides[this.slideIndex - 1].classList.add('slideInUp');
   }
 
   nextSlide(number) {
