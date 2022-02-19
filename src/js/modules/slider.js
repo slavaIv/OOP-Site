@@ -3,6 +3,7 @@ export default class Slider{
         this.page = document.querySelector(page);
         this.slides = this.page.children;
         this.btns = document.querySelectorAll(btns);
+        this.home = document.querySelector(".sidecontrol a");
         this.slideIndex = 1;
     }
 
@@ -24,13 +25,18 @@ export default class Slider{
         this.showSlides(this.slideIndex += number);
     }
 
-
+    
     render() {
         this.btns.forEach(btn => {
             btn.addEventListener('click', () => {
                 this.nextSlide(1);
             });
+
+            btn.parentNode.previousElementSibling.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.slideIndex = 1;
+                this.showSlides(this.slideIndex);
+            });
         });
-        this.showSlides[this.slideIndex];
     } 
 }
