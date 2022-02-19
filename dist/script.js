@@ -66,6 +66,60 @@ class Slider {
 
 }
 
+/***/ }),
+
+/***/ "./src/js/modules/video.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/video.js ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ Video; }
+/* harmony export */ });
+class Video {
+  constructor(triggers, overlay) {
+    this.btns = document.querySelectorAll(triggers);
+    this.overlay = document.querySelector(overlay);
+    this.close = this.overlay.querySelector('.close');
+  }
+
+  createPlayer(url) {
+    this.player = new YT.Player('frame', {
+      height: '100%',
+      width: '100%',
+      videoId: `${url}`
+    });
+    console.log(this.player);
+    this.overlay.style.display = 'flex';
+  }
+
+  closePlayer() {
+    this.close.addEventListener('click', () => {
+      this.overlay.style.display = 'none';
+      this.player.stopVideo();
+      console.log("close");
+    });
+  }
+
+  init() {
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    this.btns.forEach(btn => btn.addEventListener('click', () => {
+      if (document.querySelector('iframe#frame')) {
+        this.overlay.style.display = 'flex';
+      } else {
+        this.createPlayer(btn.getAttribute('data-url'));
+      }
+    }));
+    this.closePlayer();
+  }
+
+}
+
 /***/ })
 
 /******/ 	});
@@ -132,10 +186,14 @@ var __webpack_exports__ = {};
   \************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_video__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/video */ "./src/js/modules/video.js");
+
 
 window.addEventListener('DOMContentLoaded', () => {
   const slider = new _modules_slider__WEBPACK_IMPORTED_MODULE_0__["default"]('.page', '.next');
   slider.render();
+  const video = new _modules_video__WEBPACK_IMPORTED_MODULE_1__["default"](".showup .play", '.overlay');
+  video.init();
 });
 }();
 /******/ })()
