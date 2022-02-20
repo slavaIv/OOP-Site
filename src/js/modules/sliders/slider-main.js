@@ -1,13 +1,12 @@
-export default class Slider{
+import Slider from "./slider"
+
+
+export default class MainSlider extends Slider{
     constructor(page, btns) {
-        this.page = document.querySelector(page);
-        this.slides = this.page.children;
-        this.btns = document.querySelectorAll(btns);
-        this.slideIndex = 1;
-
-
+        super(page, btns);
         this.hanson = document.querySelector('.hanson');
     }
+
 
     showSlides(number) {
 

@@ -11,7 +11,6 @@ export default class Video {
             width: '100%',
             videoId: `${url}`,
         });
-        console.log(this.player);
         this.overlay.style.display = 'flex';
     }
 
@@ -19,7 +18,6 @@ export default class Video {
         this.close.addEventListener('click', () => {
             this.overlay.style.display = 'none';
             this.player.stopVideo();
-            console.log("close");
         })
     }
 
