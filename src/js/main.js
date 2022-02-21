@@ -1,9 +1,17 @@
 import MainSlider from "./modules/sliders/slider-main"
 import MainSlider2 from "./modules/sliders/slider-main2";
 import Video from "./modules/video"
+import showPanel from "./modules/showPanel"
 
 
 window.addEventListener('DOMContentLoaded', () => {
+
+    const panel = new showPanel('.officerold');
+    panel.render();
+
+    const panel2 = new showPanel('.officernew');
+    panel2.render();
+
     const slider = new MainSlider({page: '.page', btns: '.next'});
     slider.render();
 

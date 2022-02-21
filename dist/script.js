@@ -1,6 +1,61 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/modules/showPanel.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/showPanel.js ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ showPanel; }
+/* harmony export */ });
+class showPanel {
+  constructor(container) {
+    this.container = document.querySelector(container);
+    this.slides = this.container.querySelectorAll('.officer__card-item');
+    this.counter = 0;
+  }
+
+  hide() {
+    this.slides.forEach((element, index, arr) => {
+      if (index !== arr.length - 1) {
+        element.style.display = 'none';
+      }
+    });
+  }
+
+  addPanel() {
+    this.container.querySelector('.plus').addEventListener('click', () => {
+      this.show(this.counter);
+
+      if (this.counter >= this.slides.length - 1) {
+        this.counter = 0;
+      }
+
+      this.counter++;
+    });
+  }
+
+  show(number) {
+    this.slides.forEach((element, index, arr) => {
+      if (arr[number].style.display === 'none') {
+        arr[number].style.display = 'flex';
+      }
+    });
+  }
+
+  render() {
+    this.hide();
+    this.addPanel();
+  }
+
+}
+
+/***/ }),
+
 /***/ "./src/js/modules/sliders/slider-main.js":
 /*!***********************************************!*\
   !*** ./src/js/modules/sliders/slider-main.js ***!
@@ -24385,10 +24440,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_sliders_slider_main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/sliders/slider-main */ "./src/js/modules/sliders/slider-main.js");
 /* harmony import */ var _modules_sliders_slider_main2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/sliders/slider-main2 */ "./src/js/modules/sliders/slider-main2.js");
 /* harmony import */ var _modules_video__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/video */ "./src/js/modules/video.js");
+/* harmony import */ var _modules_showPanel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/showPanel */ "./src/js/modules/showPanel.js");
+
 
 
 
 window.addEventListener('DOMContentLoaded', () => {
+  const panel = new _modules_showPanel__WEBPACK_IMPORTED_MODULE_3__["default"]('.officerold');
+  panel.render();
+  const panel2 = new _modules_showPanel__WEBPACK_IMPORTED_MODULE_3__["default"]('.officernew');
+  panel2.render();
   const slider = new _modules_sliders_slider_main__WEBPACK_IMPORTED_MODULE_0__["default"]({
     page: '.page',
     btns: '.next'
