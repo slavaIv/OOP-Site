@@ -16,22 +16,17 @@ export default class showPanel {
     addPanel() {
         this.container.querySelector('.plus').addEventListener('click', () => {
             this.show(this.counter);
-            
-            if(this.counter >= this.slides.length - 1) {
-                this.counter = 0;
-            }
             this.counter ++;
         });
-        
-
     }
 
     show(number) {
         this.slides.forEach((element, index, arr) => {
-            if(arr[number].style.display === 'none') {
-                arr[number].style.display = 'flex';
+            arr[number].style.display = 'flex';
+            if(number === this.slides.length - 2) {
+                arr[this.slides.length - 1].style.display = 'none';
             }
-        })
+        });
     }
 
     render() {
