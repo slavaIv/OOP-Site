@@ -1,47 +1,71 @@
+import { setInterval } from "core-js";
 import Slider from "./slider"
 
 
 export default class MainSlider2 extends Slider {
-    constructor(page, next, prev) {
-        super(page, next, prev);
+    constructor(page, next, prev, activeClass, animate) {
+        super(page, next, prev, activeClass, animate);
 
     }
 
-    showSlides(number) {
-        if(number > this.slides.length) {
-            this.slideIndex = 1;
-        }
-        if(number < 1) {
-            this.slideIndex = this.slides.length;
-        }
-
+    showSlides() {
         [...this.slides].forEach(slide => {
-            slide.style.display = 'none';
-            slide.classList.remove('card-active');
-            // slide.style.opacity = '0';
+            slide.classList.remove(this.activeClass);
+            if(this.animate) {
+                slide.classList.add(this.activeClass);
+                slide.querySelector('.card__title').style.opacity = '0.4';
+                slide.querySelector('.card__controls-arrow').style.opacity = '0';
+            }
         });
 
-        this.slides[this.slideIndex - 1].style.display = 'block';
-        this.slides[this.slideIndex - 1].classList.add('card-active');
-        // // this.slides[this.slideIndex - 1].classList.add('animated');
-        // // this.slides[this.slideIndex - 1].classList.add('slideInUp');
-
+        this.slides[0].classList.add(this.activeClass);
+        
+        if(this.animate) {
+            this.slides[0].querySelector('.card__title').style.opacity = '1';
+            this.slides[0].querySelector('.card__controls-arrow').style.opacity = '1';
+        }
     }
 
-    nextSlide(number) {
-        this.showSlides(this.slideIndex += number);
+    nextClick() {
+        if(this.slides[1].tagName === 'BUTTON') {
+            this.page.appendChild(this.slides[0]);
+            this.page.appendChild(this.slides[0]);
+        }
+        this.page.appendChild(this.slides[0]);
+        this.showSlides();
     }
 
-
-    render() {
+    toggle() {
         this.next.addEventListener('click', () => {
-            this.nextSlide(1);
+            this.nextClick();
         });
 
         this.prev.addEventListener('click', () => {
-            this.nextSlide(-1);
+            if(this.slides[this.slides.length - 1].tagName === 'BUTTON') {
+                this.page.appendChild(this.slides[0]);
+                this.page.appendChild(this.slides[0]);
+            }
+            let active = (this.slides.length - 1);
+            this.page.insertBefore(this.slides[active], this.slides[0]);
+            this.showSlides();
         });
+    }
 
-        this.showSlides(1);
+    render() {
+        this.page.style.cssText = `
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            align-items: flex-start;
+        `;
+
+        if(this.autoplay) {
+            setInterval(() => {
+                this.nextClick();
+            }, 5000);
+        }
+
+        this.toggle();
+        this.showSlides();
     } 
 }
