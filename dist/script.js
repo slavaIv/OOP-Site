@@ -176,12 +176,13 @@ class MainSlider2 extends _slider__WEBPACK_IMPORTED_MODULE_1__["default"] {
       this.nextClick();
     });
     this.prev.addEventListener('click', () => {
+      let active = this.slides.length - 1;
+
       if (this.slides[this.slides.length - 1].tagName === 'BUTTON') {
-        this.page.appendChild(this.slides[0]);
-        this.page.appendChild(this.slides[0]);
+        this.page.insertBefore(this.slides[active], this.slides[0]);
+        this.page.insertBefore(this.slides[active], this.slides[0]);
       }
 
-      let active = this.slides.length - 1;
       this.page.insertBefore(this.slides[active], this.slides[0]);
       this.showSlides();
     });
