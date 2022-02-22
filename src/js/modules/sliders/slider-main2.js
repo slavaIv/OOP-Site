@@ -3,8 +3,8 @@ import Slider from "./slider"
 
 
 export default class MainSlider2 extends Slider {
-    constructor(page, next, prev, activeClass, animate) {
-        super(page, next, prev, activeClass, animate);
+    constructor(page, next, prev, activeClass, animate, arrowBlank) {
+        super(page, next, prev, activeClass, animate, arrowBlank);
 
     }
 
@@ -13,16 +13,20 @@ export default class MainSlider2 extends Slider {
             slide.classList.remove(this.activeClass);
             if(this.animate) {
                 slide.classList.add(this.activeClass);
-                slide.querySelector('.card__title').style.opacity = '0.4';
-                slide.querySelector('.card__controls-arrow').style.opacity = '0';
+                if(this.arrowBlank) {
+                    slide.querySelector('.card__title').style.opacity = '0.4';
+                    slide.querySelector('.card__controls-arrow').style.opacity = '0';
+                }
             }
         });
 
         this.slides[0].classList.add(this.activeClass);
         
         if(this.animate) {
-            this.slides[0].querySelector('.card__title').style.opacity = '1';
-            this.slides[0].querySelector('.card__controls-arrow').style.opacity = '1';
+            if(this.arrowBlank) {
+                this.slides[0].querySelector('.card__title').style.opacity = '1';
+                this.slides[0].querySelector('.card__controls-arrow').style.opacity = '1';
+            }
         }
     }
 
@@ -52,20 +56,23 @@ export default class MainSlider2 extends Slider {
     }
 
     render() {
-        this.page.style.cssText = `
-            display: flex;
-            flex-wrap: wrap;
-            overflow: hidden;
-            align-items: flex-start;
-        `;
+        try{
+            this.page.style.cssText = `
+                display: flex;
+                flex-wrap: wrap;
+                overflow: hidden;
+                align-items: flex-start;
+            `;
 
-        if(this.autoplay) {
-            setInterval(() => {
-                this.nextClick();
-            }, 5000);
+            if(this.autoplay) {
+                setInterval(() => {
+                    this.nextClick();
+                }, 2000);
+            }
+
+            this.toggle();
+            this.showSlides();
         }
-
-        this.toggle();
-        this.showSlides();
+        catch(e){}
     } 
 }

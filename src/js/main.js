@@ -1,7 +1,8 @@
-import MainSlider from "./modules/sliders/slider-main"
+import MainSlider from "./modules/sliders/slider-main";
 import MainSlider2 from "./modules/sliders/slider-main2";
-import Video from "./modules/video"
-import showPanel from "./modules/showPanel"
+import Video from "./modules/video";
+import showPanel from "./modules/showPanel";
+import Form from "./modules/forms";
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -12,8 +13,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const panel2 = new showPanel('.officernew');
     panel2.render();
 
-    const slider = new MainSlider({page: '.page', btns: '.next'});
+    const slider = new MainSlider({page: '.page', btns: '.page .next'});
     slider.render();
+
+
 
     const slider2 = new MainSlider2({
         page: '.showup__content-slider', 
@@ -21,7 +24,8 @@ window.addEventListener('DOMContentLoaded', () => {
         prev: '.showup__prev', 
         activeClass: 'card-active', 
         animate: true, 
-        autoplay: false
+        autoplay: false,
+        arrowBlank: true
     });
 
     slider2.render();
@@ -32,7 +36,8 @@ window.addEventListener('DOMContentLoaded', () => {
         prev: '.modules__info-btns .slick-prev',
         activeClass: 'card-active',
         animate: true, 
-        autoplay: true
+        autoplay: true,
+        arrowBlank: true
     });
 
     slider3.render();
@@ -43,12 +48,31 @@ window.addEventListener('DOMContentLoaded', () => {
         prev: '.feed__slider .slick-prev',
         activeClass: 'feed__item-active',
         animate: false, 
-        autoplay: false
+        autoplay: false,
+        arrowBlank: true
     });
 
     slider4.render();
 
+
+    const sliderModules = new MainSlider({page: '.moduleapp', btns: '.moduleapp .next'});
+    sliderModules.render();
+
+    // const sliderModules2 = new MainSlider2({
+    //     page: '.moduleapp', 
+    //     next: '.next', 
+    //     prev: '.prev', 
+    //     activeClass: false, 
+    //     animate: true, 
+    //     autoplay: false,
+    //     arrowBlank: false
+    // });
+
+    // sliderModules2.render();
+
     const video = new Video(".showup .play", '.overlay');
-    
     video.init();
+
+    new Form('.form').init();
+
 })
