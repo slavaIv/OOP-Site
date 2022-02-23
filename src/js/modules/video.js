@@ -22,21 +22,32 @@ export default class Video {
     }
 
     init() {
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-  
-        this.btns.forEach(btn => btn.addEventListener('click', () => {
-            if(document.querySelector('iframe#frame')) {
-                this.overlay.style.display = 'flex';
-            }
-            else {
-                this.createPlayer(btn.getAttribute('data-url'));
-            }
-        }));
+        if(this.btns.length > 0) {
 
-        this.closePlayer();
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      
+            this.btns.forEach(btn => btn.addEventListener('click', () => {
+                if(document.querySelector('iframe#frame')) {
+                    this.overlay.style.display = 'flex';
+                    if(this.path !== btn.getAttribute('data-url')) {
+                        this.path = btn.getAttribute('data-url');
+                        this.player.loadVideoById({videoId: this.path});
+                    }
+                }
+                else {
+                    this.path = btn.getAttribute('data-url');
+                    this.createPlayer(this.path);
+                }
+            }));
+    
+            this.closePlayer();
+
+
+        }
+
 
     }
 }
