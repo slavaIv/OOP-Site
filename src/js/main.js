@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const panel2 = new showPanel('.officernew');
     panel2.render();
 
-    const panel3 = new ShowInfo('.module__info-show', '.msg');
+    const panel3 = new ShowInfo('.module__info-show');
     panel3.show();
 
     const slider = new MainSlider({page: '.page', btns: '.page .next'});

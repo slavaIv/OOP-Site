@@ -1,13 +1,13 @@
 export default class ShowInfo {
-    constructor(container, msg) {
-        this.container = document.querySelector(container);
-        this.message = document.querySelector(msg);
+    constructor(container) {
+        this.container = document.querySelectorAll(container);
     }
 
     show() {
-        this.container.addEventListener('click', () => {
-            this.message.classList.toggle('msg');
-            this.message.style.marginTop = '20px';
-        });
+        this.container.forEach(btn => btn.addEventListener('click', () => {
+            const message = btn.nextElementSibling;
+            message.classList.toggle('msg');
+            message.style.marginTop = '20px';
+        }));
     }
 }
