@@ -1,6 +1,43 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/modules/download.js":
+/*!************************************!*\
+  !*** ./src/js/modules/download.js ***!
+  \************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ Download; }
+/* harmony export */ });
+class Download {
+  constructor(triggers) {
+    this.btns = document.querySelectorAll(triggers);
+    this.path = "./assets/img/mainbg.jpg";
+  }
+
+  downloadItem(path) {
+    const link = document.createElement('a');
+    link.setAttribute('href', path);
+    link.setAttribute('download', 'some picture');
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  init() {
+    this.btns.forEach(btn => btn.addEventListener('click', () => {
+      this.downloadItem(this.path);
+    }));
+  }
+
+}
+
+/***/ }),
+
 /***/ "./src/js/modules/forms.js":
 /*!*********************************!*\
   !*** ./src/js/modules/forms.js ***!
@@ -24684,6 +24721,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_showPanel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/showPanel */ "./src/js/modules/showPanel.js");
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_showInfo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/showInfo */ "./src/js/modules/showInfo.js");
+/* harmony import */ var _modules_download__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/download */ "./src/js/modules/download.js");
+
 
 
 
@@ -24702,6 +24741,7 @@ window.addEventListener('DOMContentLoaded', () => {
     btns: '.page .next'
   });
   slider.render();
+  new _modules_download__WEBPACK_IMPORTED_MODULE_6__["default"]('.download').init();
   const slider2 = new _modules_sliders_slider_main2__WEBPACK_IMPORTED_MODULE_1__["default"]({
     page: '.showup__content-slider',
     next: '.showup__next',

@@ -4,6 +4,7 @@ import Video from "./modules/video";
 import showPanel from "./modules/showPanel";
 import Form from "./modules/forms";
 import ShowInfo from "./modules/showInfo";
+import Download from "./modules/download";
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -20,7 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const slider = new MainSlider({page: '.page', btns: '.page .next'});
     slider.render();
 
-
+    new Download('.download').init();
 
     const slider2 = new MainSlider2({
         page: '.showup__content-slider', 
