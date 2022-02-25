@@ -63,7 +63,6 @@ export default class Video {
                 }
                 catch(e){};
 
-
                 btn.addEventListener('click', () => {
                     if(!btn.closest('.module__video-item') || btn.closest('.module__video-item').getAttribute('data-disabled') !== 'true'){
                         this.activeBtn = btn;
@@ -78,20 +77,11 @@ export default class Video {
                             this.path = btn.getAttribute('data-url');
                             this.createPlayer(this.path);
                         }
-
-
-
                     }
-
                 });
             }
             );
-
             this.closePlayer();
-
-
         }
-
-
     }
 }

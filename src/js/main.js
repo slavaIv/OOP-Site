@@ -3,6 +3,7 @@ import MainSlider2 from "./modules/sliders/slider-main2";
 import Video from "./modules/video";
 import showPanel from "./modules/showPanel";
 import Form from "./modules/forms";
+import ShowInfo from "./modules/showInfo";
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -12,6 +13,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const panel2 = new showPanel('.officernew');
     panel2.render();
+
+    const panel3 = new ShowInfo('.module__info-show', '.msg');
+    panel3.show();
 
     const slider = new MainSlider({page: '.page', btns: '.page .next'});
     slider.render();
@@ -57,18 +61,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const sliderModules = new MainSlider({page: '.moduleapp', btns: '.moduleapp .next'});
     sliderModules.render();
-
-    // const sliderModules2 = new MainSlider2({
-    //     page: '.moduleapp', 
-    //     next: '.next', 
-    //     prev: '.prev', 
-    //     activeClass: false, 
-    //     animate: true, 
-    //     autoplay: false,
-    //     arrowBlank: false
-    // });
-
-    // sliderModules2.render();
 
     const video = new Video(".showup .play", '.overlay');
     video.init();

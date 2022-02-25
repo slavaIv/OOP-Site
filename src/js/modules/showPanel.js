@@ -28,6 +28,7 @@ export default class showPanel {
 
     show(number) {
         this.slides.forEach((element, index, arr) => {
+            
             arr[number].style.display = 'flex';
             if(number === this.slides.length - 2) {
                 arr[this.slides.length - 1].style.display = 'none';
